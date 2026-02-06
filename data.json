@@ -1,0 +1,9 @@
+{
+  "rooms": [
+    {"id": 101, "capacity": 60, "occupied": 55, "energy": 5},
+    {"id": 102, "capacity": 60, "occupied": 12, "energy": 5},
+    {"id": 103, "capacity": 60, "occupied": 0, "energy": 5},
+    {"id": 104, "capacity": 40, "occupied": 35, "energy": 4},
+    {"id": 105, "capacity": 40, "occupied": 5, "energy": 4}
+  ]
+}
