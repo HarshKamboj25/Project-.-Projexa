@@ -1,36 +1,161 @@
+
+/* ===== Animated Soft Gradient Background ===== */
+
 body{
-    font-family: Arial;
+    font-family: 'Segoe UI', sans-serif;
+    margin:0;
+    padding:30px;
     text-align:center;
-    background:#f2f6fa;
+    color:#1f2937;
+
+    background: linear-gradient(-45deg,#dbeafe,#eef2ff,#f8fafc,#e0f2fe);
+    background-size: 400% 400%;
+    animation: gradientMove 12s ease infinite;
+
+    overflow-x:hidden;
 }
 
+/* smooth moving bg */
+@keyframes gradientMove{
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+
+/* ===== Page Load Animation ===== */
+body{
+    animation: pageEnter 0.8s ease;
+}
+
+@keyframes pageEnter{
+    from{
+        opacity:0;
+        transform: translateY(15px);
+    }
+    to{
+        opacity:1;
+        transform: translateY(0);
+    }
+}
+
+
+/* ===== Title ===== */
 h1{
-    margin-top:20px;
+    color:#1e3a8a;
+    font-weight:700;
+    margin-bottom:25px;
+    animation: float 3s ease-in-out infinite;
 }
 
+@keyframes float{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-4px)}
+}
+
+
+/* ===== Button ===== */
 button{
-    padding:10px 20px;
-    background:green;
+    background:#2563eb;
     color:white;
+    padding:11px 22px;
     border:none;
-    border-radius:5px;
+    border-radius:8px;
+    font-weight:600;
     cursor:pointer;
-    margin:20px;
+
+    box-shadow:0 6px 18px rgba(37,99,235,0.35);
+
+    transition: all 0.25s ease;
 }
 
+button:hover{
+    background:#1d4ed8;
+    transform: translateY(-3px) scale(1.05);
+    box-shadow:0 10px 24px rgba(37,99,235,0.5);
+}
+
+
+/* ===== Table Card ===== */
 table{
     margin:auto;
+    width:80%;
     border-collapse:collapse;
-    width:70%;
+
+    background:white;
+    border-radius:14px;
+
+    box-shadow:0 12px 35px rgba(0,0,0,0.08);
+
+    overflow:hidden;
+
+    animation: cardPop 0.7s ease;
 }
 
-th, td{
-    border:1px solid gray;
-    padding:8px;
+@keyframes cardPop{
+    from{
+        opacity:0;
+        transform: scale(0.96) translateY(25px);
+    }
+    to{
+        opacity:1;
+        transform: scale(1) translateY(0);
+    }
 }
 
+
+/* header */
+th{
+    background:#2563eb;
+    color:white;
+    padding:12px;
+    font-weight:600;
+}
+
+/* cells */
+td{
+    padding:10px;
+    border-bottom:1px solid #e5e7eb;
+}
+
+/* row hover */
+tr:hover{
+    background:#f1f5ff;
+    transform:scale(1.01);
+    transition:0.2s;
+}
+
+
+/* ===== Suggestions Box ===== */
 #result{
-    margin-top:20px;
-    font-weight:bold;
-    color:#333;
+    margin-top:25px;
+    width:65%;
+    margin-left:auto;
+    margin-right:auto;
+    padding:18px;
+
+    background:white;
+
+    border-radius:12px;
+
+    box-shadow:0 8px 22px rgba(0,0,0,0.08);
+
+    animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn{
+    from{opacity:0}
+    to{opacity:1}
+}
+
+
+/* ===== Status Colors ===== */
+.free{
+    color:#16a34a;
+    font-weight:600;
+}
+
+.occupied{
+    color:#dc2626;
+    font-weight:600;
 }

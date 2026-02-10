@@ -1,3 +1,7 @@
+window.onload = () => {
+    document.body.style.opacity = 1;
+}
+
 async function runAI() {
 
     const res = await fetch("data.json");
@@ -27,7 +31,10 @@ async function runAI() {
                 <td>${room.capacity}</td>
                 <td>${room.occupied}</td>
                 <td>${room.energy}</td>
-                <td>${room.occupied === 0 ? "Free" : "Occupied"}</td>
+                <td class="${room.occupied === 0 ? 'free' : 'occupied'}">
+                ${room.occupied === 0 ? "Free" : "Occupied"}
+                </td>
+
                 <td>${room.occupied === 0 ? `<button onclick="bookRoom(${room.id})">Book</button>` : "-"}</td>
 
             </tr>
@@ -58,3 +65,7 @@ function bookRoom(id){
     alert("Room " + id + " booked successfully ✅");
 }
 
+result.style.animation = "none";
+setTimeout(()=> {
+    result.style.animation = "pop 0.5s ease";
+},10);
