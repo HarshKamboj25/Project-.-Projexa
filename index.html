@@ -1,33 +1,402 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>AI Smart Campus Optimizer</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Campus Resource Optimization System</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<h1>🏫 AI Smart Campus Resource Optimization Dashboard</h1>
+<header>
+  <div class="logo">
+    <div class="logo-icon">🏛️</div>
+    <div class="logo-text">
+      <h1>SMART CAMPUS AI</h1>
+      <p>Resource Optimization System v1.0</p>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="live-badge"><div class="live-dot"></div> SYSTEM ACTIVE</div>
+    <div class="timestamp" id="clock"></div>
+  </div>
+</header>
 
-<button onclick="runAI()">Run AI Optimization</button>
+<nav>
+  <button class="tab active" onclick="showTab('dashboard')">📊 Dashboard</button>
+  <button class="tab" onclick="showTab('rooms')">🏫 Room Monitor</button>
+  <button class="tab" onclick="showTab('energy')">⚡ Energy</button>
+  <button class="tab" onclick="showTab('booking')">📅 Book Room</button>
+  <button class="tab" onclick="showTab('ai')">🤖 AI Analysis</button>
+</nav>
 
-<h2>Room Status</h2>
-<table id="roomTable">
-    <tr>
-        <th>Room</th>
-        <th>Capacity</th>
-        <th>Occupied</th>
-       <th>Energy (kWh)</th>
-       <th>Status</th>
-       <th>Action</th>
+<main>
 
-    </tr>
-</table>
+  <!-- ═══════════════════════════════════════ DASHBOARD ═══ -->
+  <div class="section active" id="tab-dashboard">
 
-<h2>AI Suggestions</h2>
-<div id="result"></div>
+    <div class="stats-row">
+      <div class="stat-card blue">
+        <div class="stat-label">Total Rooms</div>
+        <div class="stat-value">16</div>
+        <div class="stat-sub">Across 4 buildings</div>
+        <div class="stat-icon">🏛️</div>
+      </div>
+      <div class="stat-card green">
+        <div class="stat-label">Occupied Now</div>
+        <div class="stat-value" id="occupied-count">9</div>
+        <div class="stat-sub">Rooms in active use</div>
+        <div class="stat-icon">👥</div>
+      </div>
+      <div class="stat-card orange">
+        <div class="stat-label">Energy Saved</div>
+        <div class="stat-value">34%</div>
+        <div class="stat-sub">vs. last month</div>
+        <div class="stat-icon">⚡</div>
+      </div>
+      <div class="stat-card gold">
+        <div class="stat-label">AI Suggestions</div>
+        <div class="stat-value">7</div>
+        <div class="stat-sub">Pending actions</div>
+        <div class="stat-icon">🤖</div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">Room Status Overview</div>
+        <div class="donut-wrap">
+          <div class="donut" style="background: conic-gradient(#ff4444 0% 19%, #ffaa00 19% 44%, #00cc66 44% 81%, #00d4ff 81% 100%);">
+            <div class="donut-inner">
+              <div class="donut-val">16</div>
+              <div class="donut-sub">ROOMS</div>
+            </div>
+          </div>
+          <div>
+            <div class="legend-item"><div class="legend-dot" style="background:#ff4444"></div> Empty (3) — Power OFF needed</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#ffaa00"></div> Underutilized (4) — Merge classes</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#00cc66"></div> Efficient (6) — Optimal usage</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#00d4ff"></div> Full (3) — At capacity</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Building Utilization</div>
+        <div class="prog-wrap">
+          <div class="prog-label"><span>Block A — Science</span><span style="color:var(--good)">78%</span></div>
+          <div class="prog-bar"><div class="prog-fill green" style="width:78%"></div></div>
+        </div>
+        <div class="prog-wrap">
+          <div class="prog-label"><span>Block B — Arts</span><span style="color:var(--warn)">42%</span></div>
+          <div class="prog-bar"><div class="prog-fill orange" style="width:42%"></div></div>
+        </div>
+        <div class="prog-wrap">
+          <div class="prog-label"><span>Block C — Commerce</span><span style="color:var(--danger)">18%</span></div>
+          <div class="prog-bar"><div class="prog-fill red" style="width:18%"></div></div>
+        </div>
+        <div class="prog-wrap">
+          <div class="prog-label"><span>Block D — Engineering</span><span style="color:var(--accent)">91%</span></div>
+          <div class="prog-bar"><div class="prog-fill blue" style="width:91%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🤖 AI Optimization Suggestions</div>
+      <div class="suggestion danger">
+        <div class="sug-icon">🔴</div>
+        <div>
+          <div class="sug-title">Turn OFF Power — Rooms C-101, C-103, C-105</div>
+          <div class="sug-desc">These 3 rooms in Block C have been empty for 45+ minutes. Lights and fans are consuming power unnecessarily. Estimated waste: 2.4 kWh/hour. Immediate action required.</div>
+        </div>
+      </div>
+      <div class="suggestion warn">
+        <div class="sug-icon">🟡</div>
+        <div>
+          <div class="sug-title">Merge Classes — B-201 & B-203 (40% occupancy each)</div>
+          <div class="sug-desc">Both rooms have less than 45% occupancy. Merging will free one room and improve energy efficiency by 50% for that block. Recommend moving B-203 students to B-201.</div>
+        </div>
+      </div>
+      <div class="suggestion warn">
+        <div class="sug-icon">🟡</div>
+        <div>
+          <div class="sug-title">Relocate — B-205 class to smaller room</div>
+          <div class="sug-desc">Room B-205 (capacity 80) has only 22 students (27% usage). Relocating to room A-102 (capacity 30) will optimize space and reduce energy load by 35%.</div>
+        </div>
+      </div>
+      <div class="suggestion info">
+        <div class="sug-icon">🔵</div>
+        <div>
+          <div class="sug-title">Room D-301 — Available for immediate booking</div>
+          <div class="sug-desc">Engineering Block room D-301 has been freed. It supports 60 students with full AV setup. Available until 5:00 PM today. Use the Booking tab to reserve.</div>
+        </div>
+      </div>
+      <div class="suggestion success">
+        <div class="sug-icon">🟢</div>
+        <div>
+          <div class="sug-title">Excellent — Block A operating at peak efficiency</div>
+          <div class="sug-desc">All 4 rooms in Block A are above 70% occupancy. Energy is being utilized optimally. No action needed. This is the target model for all blocks.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ ROOM MONITOR ═══ -->
+  <div class="section" id="tab-rooms">
+    <div class="card" style="margin-bottom:20px;">
+      <div class="card-title">Live Room Occupancy Grid</div>
+      <div class="room-grid" id="room-grid"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Room Details Table</div>
+      <table class="room-table">
+        <thead>
+          <tr>
+            <th>Room ID</th>
+            <th>Block</th>
+            <th>Capacity</th>
+            <th>Present</th>
+            <th>Usage %</th>
+            <th>Status</th>
+            <th>Energy</th>
+            <th>AI Suggestion</th>
+          </tr>
+        </thead>
+        <tbody id="room-table-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ ENERGY ═══ -->
+  <div class="section" id="tab-energy">
+    <div class="stats-row">
+      <div class="stat-card orange">
+        <div class="stat-label">Current Load</div>
+        <div class="stat-value">187</div>
+        <div class="stat-sub">kWh in use</div>
+        <div class="stat-icon">⚡</div>
+      </div>
+      <div class="stat-card green">
+        <div class="stat-label">Saved Today</div>
+        <div class="stat-value">43</div>
+        <div class="stat-sub">kWh saved vs baseline</div>
+        <div class="stat-icon">🌱</div>
+      </div>
+      <div class="stat-card blue">
+        <div class="stat-label">Wastage</div>
+        <div class="stat-value">12</div>
+        <div class="stat-sub">kWh in empty rooms</div>
+        <div class="stat-icon">💡</div>
+      </div>
+      <div class="stat-card gold">
+        <div class="stat-label">CO₂ Reduced</div>
+        <div class="stat-value">31</div>
+        <div class="stat-sub">kg today</div>
+        <div class="stat-icon">🌍</div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">⚡ Energy by Room</div>
+        <div id="energy-bars"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">📊 Daily Consumption Trend</div>
+        <canvas id="trendChart" width="400" height="220"></canvas>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🌱 Sustainability Impact</div>
+      <div class="grid-3" style="margin-bottom:0;">
+        <div style="text-align:center; padding:20px;">
+          <div style="font-family:'Orbitron',monospace; font-size:36px; color:var(--accent2); font-weight:700;">₹2,840</div>
+          <div style="color:var(--muted); font-size:13px; margin-top:6px;">Cost saved this month</div>
+        </div>
+        <div style="text-align:center; padding:20px;">
+          <div style="font-family:'Orbitron',monospace; font-size:36px; color:var(--accent); font-weight:700;">389 kWh</div>
+          <div style="color:var(--muted); font-size:13px; margin-top:6px;">Total energy saved this month</div>
+        </div>
+        <div style="text-align:center; padding:20px;">
+          <div style="font-family:'Orbitron',monospace; font-size:36px; color:var(--accent3); font-weight:700;">94%</div>
+          <div style="color:var(--muted); font-size:13px; margin-top:6px;">Rooms with smart monitoring</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ BOOKING ═══ -->
+  <div class="section" id="tab-booking">
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">📅 Book a Room</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Your Name</label>
+            <input type="text" id="teacher-name" placeholder="Prof. / Teacher name">
+          </div>
+          <div class="form-group">
+            <label>Department</label>
+            <input type="text" id="department" placeholder="e.g. Computer Science">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Select Room</label>
+            <select id="room-select"></select>
+          </div>
+          <div class="form-group">
+            <label>No. of Students</label>
+            <input type="number" id="student-count" placeholder="e.g. 35" min="1" max="120">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Date</label>
+            <input type="date" id="book-date">
+          </div>
+          <div class="form-group">
+            <label>Time Slot</label>
+            <select id="time-slot">
+              <option>9:00 AM – 10:00 AM</option>
+              <option>10:00 AM – 11:00 AM</option>
+              <option>11:00 AM – 12:00 PM</option>
+              <option>12:00 PM – 1:00 PM</option>
+              <option>2:00 PM – 3:00 PM</option>
+              <option>3:00 PM – 4:00 PM</option>
+              <option>4:00 PM – 5:00 PM</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group" style="margin-bottom:16px;">
+          <label>Purpose</label>
+          <input type="text" id="purpose" placeholder="e.g. Lecture, Lab Session, Meeting...">
+        </div>
+        <button class="btn btn-primary" onclick="bookRoom()">CONFIRM BOOKING</button>
+        <div id="booking-result"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">🏫 Available Rooms Now</div>
+        <div id="available-rooms-list"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">📋 Recent Bookings</div>
+      <table class="room-table">
+        <thead>
+          <tr><th>Room</th><th>Teacher</th><th>Department</th><th>Time</th><th>Students</th><th>Status</th></tr>
+        </thead>
+        <tbody id="bookings-table"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ AI ANALYSIS ═══ -->
+  <div class="section" id="tab-ai">
+    <div class="card" style="margin-bottom:20px;">
+      <div class="card-title">🤖 AI Engine — Smart Analysis Report</div>
+      <div class="ai-insight">
+        <div class="ai-tag">⚡ Energy Optimization</div>
+        <div class="ai-text">Based on current occupancy data, Block C is operating at only 18% efficiency. Three rooms (C-101, C-103, C-105) have been completely empty for over 45 minutes. The AI recommends immediate shutdown of HVAC and lighting in these rooms, projecting a saving of <strong style="color:var(--accent2)">2.4 kWh per hour</strong> and approximately <strong style="color:var(--accent2)">₹19 per hour</strong> in electricity costs.</div>
+      </div>
+      <div class="ai-insight">
+        <div class="ai-tag">🏫 Space Optimization</div>
+        <div class="ai-text">Current campus-wide room utilization is <strong style="color:var(--accent)">62.5%</strong>. Four underutilized rooms can be consolidated into two, freeing up two rooms for new bookings while reducing energy consumption by 35%. The AI identifies rooms B-201, B-203, B-205, and B-207 as prime candidates for class merging based on student count and proximity.</div>
+      </div>
+      <div class="ai-insight">
+        <div class="ai-tag">📈 Predictive Forecast</div>
+        <div class="ai-text">Based on the weekly pattern, Tuesdays and Thursdays between 2–4 PM see a <strong style="color:var(--accent4)">40% drop</strong> in campus occupancy. The AI recommends pre-scheduling automatic power reduction in Block B and C for these windows, which is projected to save <strong style="color:var(--accent2)">₹8,400 per month</strong> in electricity bills campus-wide.</div>
+      </div>
+      <div class="ai-insight">
+        <div class="ai-tag">🌱 Sustainability Score</div>
+        <div class="ai-text">This campus currently scores <strong style="color:var(--accent2)">72/100</strong> on the Smart Campus Sustainability Index. With full implementation of all AI suggestions, the projected score rises to <strong style="color:var(--accent2)">91/100</strong>, with CO₂ emissions reduced by an estimated <strong style="color:var(--accent2)">930 kg/month</strong>. The system is 94% accurate in its occupancy predictions based on historical patterns.</div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">📊 Weekly Pattern Analysis</div>
+        <div class="prog-wrap" style="margin-bottom:16px;">
+          <div class="prog-label"><span>Monday</span><span style="color:var(--good)">82%</span></div>
+          <div class="prog-bar"><div class="prog-fill green" style="width:82%"></div></div>
+        </div>
+        <div class="prog-wrap" style="margin-bottom:16px;">
+          <div class="prog-label"><span>Tuesday</span><span style="color:var(--accent)">75%</span></div>
+          <div class="prog-bar"><div class="prog-fill blue" style="width:75%"></div></div>
+        </div>
+        <div class="prog-wrap" style="margin-bottom:16px;">
+          <div class="prog-label"><span>Wednesday</span><span style="color:var(--good)">88%</span></div>
+          <div class="prog-bar"><div class="prog-fill green" style="width:88%"></div></div>
+        </div>
+        <div class="prog-wrap" style="margin-bottom:16px;">
+          <div class="prog-label"><span>Thursday</span><span style="color:var(--warn)">59%</span></div>
+          <div class="prog-bar"><div class="prog-fill orange" style="width:59%"></div></div>
+        </div>
+        <div class="prog-wrap">
+          <div class="prog-label"><span>Friday</span><span style="color:var(--warn)">45%</span></div>
+          <div class="prog-bar"><div class="prog-fill orange" style="width:45%"></div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">🎯 Optimization Score</div>
+        <div style="text-align:center; padding:20px 0;">
+          <div style="position:relative; display:inline-block;">
+            <svg width="180" height="180" viewBox="0 0 180 180">
+              <circle cx="90" cy="90" r="70" fill="none" stroke="var(--border)" stroke-width="14"/>
+              <circle cx="90" cy="90" r="70" fill="none" stroke="url(#scoreGrad)" stroke-width="14"
+                stroke-dasharray="440" stroke-dashoffset="123" stroke-linecap="round"
+                transform="rotate(-90 90 90)"/>
+              <defs>
+                <linearGradient id="scoreGrad" x1="0%" y1="0%" x2="100%">
+                  <stop offset="0%" stop-color="#00d4ff"/>
+                  <stop offset="100%" stop-color="#00ff88"/>
+                </linearGradient>
+              </defs>
+            </svg>
+            <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); text-align:center;">
+              <div style="font-family:'Orbitron',monospace; font-size:36px; font-weight:900; color:var(--accent);">72</div>
+              <div style="font-size:12px; color:var(--muted);">/ 100</div>
+            </div>
+          </div>
+          <div style="margin-top:12px; color:var(--muted); font-size:13px;">Current Smart Campus Score</div>
+          <div style="margin-top:4px; font-size:12px; color:var(--accent2);">▲ Target: 91 with all AI recommendations</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<div class="spacer"></div>
+
+<!-- ═══════════════════════════════════════ TICKER ═══ -->
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    <div class="ticker-item">🟢 Block A: <span>78% efficiency</span></div>
+    <div class="ticker-item">🔴 C-101 EMPTY: <span>Power OFF recommended</span></div>
+    <div class="ticker-item">⚡ Energy saved today: <span>43 kWh</span></div>
+    <div class="ticker-item">🤖 AI Confidence: <span>94%</span></div>
+    <div class="ticker-item">📅 Next free slot: <span>D-301 @ 2PM</span></div>
+    <div class="ticker-item">🌱 CO₂ Reduced: <span>31 kg</span></div>
+    <div class="ticker-item">💰 Cost Saved: <span>₹2,840 this month</span></div>
+    <div class="ticker-item">🏫 Rooms monitored: <span>16 / 16</span></div>
+    <div class="ticker-item">🟢 Block A: <span>78% efficiency</span></div>
+    <div class="ticker-item">🔴 C-101 EMPTY: <span>Power OFF recommended</span></div>
+    <div class="ticker-item">⚡ Energy saved today: <span>43 kWh</span></div>
+    <div class="ticker-item">🤖 AI Confidence: <span>94%</span></div>
+    <div class="ticker-item">📅 Next free slot: <span>D-301 @ 2PM</span></div>
+    <div class="ticker-item">🌱 CO₂ Reduced: <span>31 kg</span></div>
+    <div class="ticker-item">💰 Cost Saved: <span>₹2,840 this month</span></div>
+    <div class="ticker-item">🏫 Rooms monitored: <span>16 / 16</span></div>
+  </div>
+</div>
 
 <script src="script.js"></script>
-
 </body>
 </html>
