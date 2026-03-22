@@ -1,4 +1,4 @@
-/* BOOKING.JS — Smart booking panel logic  */
+/* BOOKING.JS — Smart booking panel logic or additional feature  */
 
 function initBookingPanel() {
   const container = document.getElementById('booking-list');
