@@ -1,4 +1,5 @@
 /* APP.JS — Main controller
+            or  
    Navigation, clock, live tickers, boot */
 
 /* ── PANEL TITLES ── */
