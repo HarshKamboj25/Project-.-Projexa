@@ -1,5 +1,4 @@
-/* ==
-   DATA.JS — All mock data for SmartCampus AI*/
+/*DATA.JS — All mock data for SmartCampus AI*/
 const DATA = {
   hours:     ['6AM','7','8','9','10','11','12PM','1','2','3','4','5','6','7','8'],
   energy:    [12, 18, 28, 42, 55, 62, 58, 60, 72, 80, 76, 65, 48, 35, 24],
