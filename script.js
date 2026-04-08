@@ -1,4 +1,4 @@
-// ─── DATA ───────────────────────────────────────────────────────────
+// ─── DATA ───────────────────────────────────────────────────────
 const rooms = [
   { id:'A-101', block:'A', name:'Lab 1', cap:40, occ:35, energy:'High', booked:true },
   { id:'A-102', block:'A', name:'Lecture Hall', cap:60, occ:52, energy:'High', booked:true },
