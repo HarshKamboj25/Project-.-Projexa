@@ -140,7 +140,7 @@ function buildEnergyBars() {
   });
 }
 
-// ─── TREND CHART (Canvas) ─────────────────────────────────────
+// ─── TREND CHART (Canvas) ──────────────────────────────────
 function drawTrendChart() {
   const canvas = document.getElementById('trendChart');
   if (!canvas) return;
