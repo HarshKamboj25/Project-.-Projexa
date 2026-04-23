@@ -14,7 +14,7 @@ const PANEL_TITLES = {
   settings:   'Settings',
 };
 
-/* ── SWITCH PANEL ── */
+/* ─ SWITCH PANEL ─ */
 function switchPanel(id) {
   // Hide all
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
