@@ -293,3 +293,7 @@ buildBookingUI();
 setTimeout(drawTrendChart, 100);
 
 document.querySelectorAll('.stat-card').forEach((c, i) => c.style.animationDelay = (i * 0.1) + 's');
+
+
+
+////////////////////////////////////////////////////////
